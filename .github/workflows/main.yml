@@ -1,0 +1,23 @@
+name: Maven Package on Push
+
+on:
+  push:        # Triggers on any push
+    branches:
+      - '**'   # All branches
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'   # Use Temurin JDK
+          java-version: '17'        # You can change this to 8, 11, etc.
+
+      - name: Package with Maven
+        run: mvn clean package
